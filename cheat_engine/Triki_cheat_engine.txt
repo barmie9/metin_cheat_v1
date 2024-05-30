@@ -1,0 +1,13 @@
+1. Metin jak znaleźć adres chodzenia:
+- Do podstawowego chodzenia 2 adresy
+- Podaczas chodzenia do przodu wartość 1 na jednym na drugim 256/65536
+- podczas chodzenia do tyłu 256 na obu
+- Pierwszy adres:
+	046E8260+A0=046E8300
+	"Samia.exe"+ 009CFB6C -> 046E8260
+- Drugi:
+	A4
+	"Samia.exe"+009CFB6C
+
+
+2. Do ataku można wykorzystać drugą wartość do chodzenia (ustawić np na 1 lub 65537)
