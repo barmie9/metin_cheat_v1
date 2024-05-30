@@ -4,6 +4,7 @@
     <CheatEntry>
       <ID>3</ID>
       <Description>"attack/walk_ptr"</Description>
+      <LastState Value="65536" RealAddress="06C32C98"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>CarolineMT2.exe+19505F8</Address>
@@ -14,6 +15,7 @@
     <CheatEntry>
       <ID>14</ID>
       <Description>"key_3"</Description>
+      <LastState Value="00000000" RealAddress="73DD12BC"/>
       <ShowAsHex>1</ShowAsHex>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
@@ -22,6 +24,7 @@
     <CheatEntry>
       <ID>4</ID>
       <Description>"key_4_ptr"</Description>
+      <LastState Value="00000000" RealAddress="73DD12BD"/>
       <ShowAsHex>1</ShowAsHex>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
@@ -30,6 +33,7 @@
     <CheatEntry>
       <ID>6</ID>
       <Description>"focus_mob_id_ptr"</Description>
+      <LastState Value="0" RealAddress="06C59D20"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>CarolineMT2.exe+19505F8</Address>
@@ -40,6 +44,7 @@
     <CheatEntry>
       <ID>8</ID>
       <Description>"auto_atak_id_ptr"</Description>
+      <LastState Value="0" RealAddress="06C32C84"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>CarolineMT2.exe+19505F8</Address>
@@ -50,6 +55,7 @@
     <CheatEntry>
       <ID>11</ID>
       <Description>"focus_klas_mob_id_ptr"</Description>
+      <LastState Value="0" RealAddress="280219F0"/>
       <VariableType>4 Bytes</VariableType>
       <Address>"python27.dll"+0024609C</Address>
       <Offsets>
@@ -137,9 +143,223 @@ CarolineMT2.exe+4B2DB: 5B                 - pop ebx
     <CheatEntry>
       <ID>19</ID>
       <Description>"No description"</Description>
+      <LastState Value="2179517323" RealAddress="00D1B2C8"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>CarolineMT2.exe+4B2C8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="100" RealAddress="1E245B3C"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+245B3C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="131478048" RealAddress="1E245B40"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+245B40</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="132767792" RealAddress="1E245B44"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+245B44</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="100" RealAddress="1E245D7C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+245D7C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="131971888" RealAddress="1E245D80"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+245D80</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="471" RealAddress="1E246B98"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+246B98</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>26</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="131999936" RealAddress="1E246B9C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+246B9C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="471" RealAddress="1E247168"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+247168</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>28</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="136765792" RealAddress="1E24716C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+24716C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>29</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="0" RealAddress="1E247170"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+247170</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>30</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="112" RealAddress="1E24724C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+24724C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>31</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="131489488" RealAddress="1E247250"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+247250</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>32</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="132831872" RealAddress="1E247254"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+247254</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>33</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="1" RealAddress="1E247A44"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+247A44</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>34</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="131762800" RealAddress="1E247A48"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+247A48</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>35</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="430" RealAddress="1E247F54"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+247F54</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>36</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="131477952" RealAddress="1E247F58"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+247F58</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>37</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="136459432" RealAddress="1E247F5C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+247F5C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>38</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="108" RealAddress="1E2481AC"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+2481AC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>39</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="132663008" RealAddress="1E2481B0"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+2481B0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>40</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="0" RealAddress="1E2481B4"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+2481B4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>41</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="1" RealAddress="1E24859C"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+24859C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>42</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="131483392" RealAddress="1E2485A0"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+2485A0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>43</ID>
+      <Description>"python27.dll+"</Description>
+      <LastState Value="0" RealAddress="1E2485A4"/>
+      <VariableType>4 Bytes</VariableType>
+      <Address>python27.dll+2485A4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>50</ID>
+      <Description>"ptr_ostrze_val_3/2"</Description>
+      <LastState Value="2" RealAddress="080186E0"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>CarolineMT2.exe+18C8EA8</Address>
+      <Offsets>
+        <Offset>0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>52</ID>
+      <Description>"ptr_strach_val_3/2"</Description>
+      <LastState Value="2" RealAddress="08018720"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>CarolineMT2.exe+18C8EAC</Address>
+      <Offsets>
+        <Offset>0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>53</ID>
+      <Description>"ptr_aura_val_3/2"</Description>
+      <LastState Value="2" RealAddress="0800F578"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>CarolineMT2.exe+18C8E98</Address>
+      <Offsets>
+        <Offset>0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>54</ID>
+      <Description>"ptr_bersek_val_3/2"</Description>
+      <LastState Value="2" RealAddress="0800F530"/>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>4 Bytes</VariableType>
+      <Address>CarolineMT2.exe+18C8E94</Address>
+      <Offsets>
+        <Offset>0</Offset>
+      </Offsets>
     </CheatEntry>
   </CheatEntries>
   <CheatCodes>
