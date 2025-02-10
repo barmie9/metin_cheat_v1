@@ -1,5 +1,7 @@
 # my_class.py
 from ReadWriteMemory import ReadWriteMemory
+
+from color_service import ColorService
 from ctype_service import CtypeService
 from dinput_keys import DinputKeys
 from thread_executor import ThreadExecutor
@@ -10,11 +12,11 @@ import time
 class MemoryService:
     def __init__(self):
         # self.process_name = "Samia.exe"
-        self.process_name = "CarolineMT2.exe"
+        self.process_name = "Mt2009.exe"
 
         self.ctype_service = CtypeService()
         self.process_address = self.ctype_service.get_base_address(self.process_name)
-        self.code_injector = CodeInjector("CarolineMT2.exe", self.ctype_service.get_process_pid("CarolineMT2.exe"))
+        self.code_injector = CodeInjector("Mt2009.exe", self.ctype_service.get_process_pid("Mt2009.exe"))
 
 
 
@@ -38,6 +40,8 @@ class MemoryService:
         self.position = (-1, -1)
 
         self.direction_positive = True
+
+        self.color_service = ColorService(0,0)
 
     def display_process(self):
         print("Process name: " + self.process_name + " , Process address: " + str(hex(self.process_address)))
@@ -218,3 +222,14 @@ class MemoryService:
 
     def inject_test(self):
         self.code_injector.inject_code()
+
+    def update_color(self):
+        x, y = self.color_service.get_mouse_position()
+        print("Color cord: ", x, y)
+        self.color_service.set_point(x, y)
+        return self.color_service.update_color()
+
+    def press_key_if_color_equal(self, key, time_sec):
+        current_color = self.color_service.get_pixel_color()
+        if self.color_service.is_color_equal(current_color):
+            self.click_key(key, time_sec)

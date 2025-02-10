@@ -9,7 +9,7 @@ class MODULEINFO(ctypes.Structure):
 
 class CtypeService:
     def __init__(self):
-        self.process_name = "Metin2.exe"
+        self.process_name = "Mt2009.exe"
         self.user32 = ctypes.windll.user32
 
     def get_process_pid(self,process_name):
@@ -19,7 +19,7 @@ class CtypeService:
                 pid = proc.info['pid']
                 break
         else:
-            raise Exception(f"Proces {process_name} nie został znaleziony.")
+            raise Exception(f"Proces {self.process_name} nie został znaleziony.")
             return 0
         print("Process : ", process_name, " PID: ", pid)
         return pid

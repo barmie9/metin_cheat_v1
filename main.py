@@ -2,6 +2,8 @@ import time
 import tkinter as tk
 from tkinter import ttk
 from pynput import keyboard # Do globalnego przechwytywania klawitury np F12
+
+from lowienie_metin2009 import LowienieMetin
 from memory_service import MemoryService
 from script_service import ScriptService
 
@@ -10,7 +12,7 @@ class MyApp(tk.Tk):
     def __init__(self):
         super().__init__()
 
-        self.title("Przykładowa aplikacja Tkinter")
+        self.title("Metin2 Cheat")
 
         # Tworzenie i rozmieszczanie widżetów
         self.create_widgets()
@@ -27,6 +29,8 @@ class MyApp(tk.Tk):
         self.after_ids = {}  # Dictionary to store after_id for each task
 
         self.script_service = ScriptService()
+
+        self.metin_lowienie = LowienieMetin()
 
 
 
@@ -103,9 +107,30 @@ class MyApp(tk.Tk):
         self.entry_script = tk.Entry(self)
         self.entry_script.grid(row=8, column=1, padx=10, pady=5)
 
+        #  ------------------------------------------------------  -----------------------------------------------------
+        self.checkbox_color_var = tk.BooleanVar()
+        self.checkbox_color = tk.Checkbutton(self, text="press_if_color:", variable=self.checkbox_color_var,
+                                             command=self.toggle_color_checkbox)
+        self.checkbox_color.grid(row=9, column=0, columnspan=2, padx=10, pady=5, sticky=tk.W)
+
+        self.entry_color = tk.Entry(self)
+        self.entry_color.grid(row=9, column=1, padx=10, pady=5)
+
+        # Pole tekstowe tylko do odczytu
+        self.text_color_display = tk.Text(self, height=1, width=15, state='disabled')
+        self.text_color_display.grid(row=9, column=2, columnspan=2, padx=10, pady=5)
+        self.update_text(self.text_color_display, "F12-getCol")
+
+        self.text_color_rgb_display = tk.Text(self, height=1, width=15, state='disabled')
+        self.text_color_rgb_display.grid(row=9, column=3, columnspan=2, padx=10, pady=5)
+
+        # self.button_get_color = tk.Button(self, text="GET_COL", command=self.on_button_color_click)
+        # self.button_get_color.grid(row=9, column=2, columnspan=2, padx=10, pady=5)
+        # --------------------------------------------------------------------------------------------------------------
+
         # Przycisk
         self.button = tk.Button(self, text="TEST", command=self.on_button_click)
-        self.button.grid(row=9, column=0, columnspan=2, padx=10, pady=5)
+        self.button.grid(row=10, column=0, columnspan=2, padx=10, pady=5)
 
         self.is_key_pressed = False
         self.is_key_z_pressed = False
@@ -132,6 +157,12 @@ class MyApp(tk.Tk):
         self.text_display.insert(tk.END, message)  # Wstawienie nowej zawartości
         self.text_display.config(state='disabled')  # Ponowne zablokowanie pola tekstowego
 
+    def update_text(self, text_disp, message):
+        text_disp.config(state='normal')  # Odblokowanie pola tekstowego
+        text_disp.delete(1.0, tk.END)  # Usunięcie istniejącej zawartości
+        text_disp.insert(tk.END, message)  # Wstawienie nowej zawartości
+        text_disp.config(state='disabled')  # Ponowne zablokowanie pola tekstowego
+
     def toggle_pos_checkbox(self):
         self.toggle_task('pos', self.update_pos_text, 300)
 
@@ -156,6 +187,12 @@ class MyApp(tk.Tk):
 
     def toggle_script_checkbox(self):
         self.toggle_task('script', self.script_service.execute_script, 100, self.entry_script.get(), self.checkbox_script_var.get())
+
+    def toggle_color_checkbox(self):
+        # self.toggle_task('script', self.script_service.execute_script, 100, self.entry_script.get(), self.checkbox_script_var.get())
+        # TODO dokonczyc press_key_if_color_equal
+        self.toggle_task('color', self.memory_service.press_key_if_color_equal, 300, self.entry_color.get(), 0.02)
+        print("COLOR Ccheck box")
 
     def toggle_key_f1_checkbox(self):
         self.toggle_task('key_f1', self.memory_service.click_key, 600, 'F1', 0.02)
@@ -183,13 +220,22 @@ class MyApp(tk.Tk):
         try:
             if key == keyboard.Key.f12:
                 self.on_f12_press()
+            if key == keyboard.Key.f11:
+                self.on_f11_press()
         except AttributeError:
             pass
 
     def on_f12_press(self):
         # Działania do wykonania po naciśnięciu klawisza F12
-        print("Klawisz F12 został wciśnięty (globalnie)")
-        # Można dodać tutaj dalsze operacje
+        print("Klawisz F12 został wciśnięty (globalnie) - aktualizacja koloru")
+        color = self.memory_service.update_color()
+        print("Kolor RGB: " + str(color))
+        self.update_text(self.text_color_rgb_display,color)
+
+    def on_f11_press(self):
+        # Działania do wykonania po naciśnięciu klawisza F11
+        print("Klawisz F12 został wciśnięty (globalnie) - SCREENSHOT")
+        self.metin_lowienie.save_screen_shot()
 
 if __name__ == "__main__":
     app = MyApp()
