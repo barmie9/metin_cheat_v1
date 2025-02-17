@@ -2,6 +2,7 @@
 from ReadWriteMemory import ReadWriteMemory
 
 from color_service import ColorService
+from config_metin import MetinConfig
 from ctype_service import CtypeService
 from dinput_keys import DinputKeys
 from thread_executor import ThreadExecutor
@@ -12,11 +13,13 @@ import time
 class MemoryService:
     def __init__(self):
         # self.process_name = "Samia.exe"
-        self.process_name = "Mt2009.exe"
+        self.config = MetinConfig('config.cfg')
+        self.process_name = self.config.get('PROCESS_NAME')
+        # self.process_name = "Mt2009.exe"
 
         self.ctype_service = CtypeService()
         self.process_address = self.ctype_service.get_base_address(self.process_name)
-        self.code_injector = CodeInjector("Mt2009.exe", self.ctype_service.get_process_pid("Mt2009.exe"))
+        self.code_injector = CodeInjector(self.process_name, self.ctype_service.get_process_pid(self.process_name))
 
 
 
@@ -72,10 +75,10 @@ class MemoryService:
             self.thread_executor.add_function_to_queue(self.process.write, self.pWalk2, 0)
 
     def press_key(self, key):
-        print("key", key)
+        # print("key", key)
         address, value = self.dinput_keys.get_key_address(key)
 
-        print("value", address, value)
+        # print("value", address, value)
         self.process.write(address, value)
 
     def release_key(self, key):
@@ -89,7 +92,7 @@ class MemoryService:
     #     self.thread_executor.add_function_to_queue(self.release_key, key)
 
     def click_key(self, key, time_sec):
-        print("T Press: " , key)
+        # print("T Press: " , key)
         time = float(time_sec)
         self.thread_executor.add_function_to_queue(self.press_key,key)
         self.thread_executor.add_function_to_queue(self.sleep2, time)

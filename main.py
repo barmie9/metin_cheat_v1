@@ -3,7 +3,8 @@ import tkinter as tk
 from tkinter import ttk
 from pynput import keyboard # Do globalnego przechwytywania klawitury np F12
 
-from lowienie_metin2009 import LowienieMetin
+from capture_dxcam import CaptureDxcam
+# from lowienie_metin2009 import LowienieMetin
 from memory_service import MemoryService
 from script_service import ScriptService
 
@@ -30,7 +31,8 @@ class MyApp(tk.Tk):
 
         self.script_service = ScriptService()
 
-        self.metin_lowienie = LowienieMetin()
+        # self.metin_lowienie = LowienieMetin()
+        self.cap = CaptureDxcam()
 
 
 
@@ -222,6 +224,8 @@ class MyApp(tk.Tk):
                 self.on_f12_press()
             if key == keyboard.Key.f11:
                 self.on_f11_press()
+            if key == keyboard.KeyCode.from_char('e') or key == keyboard.KeyCode.from_char('E'):
+                self.on_e_press()
         except AttributeError:
             pass
 
@@ -235,7 +239,14 @@ class MyApp(tk.Tk):
     def on_f11_press(self):
         # Działania do wykonania po naciśnięciu klawisza F11
         print("Klawisz F12 został wciśnięty (globalnie) - SCREENSHOT")
-        self.metin_lowienie.save_screen_shot()
+        # self.metin_lowienie.save_screen_shot()
+        self.cap.capture_screen()
+
+    def on_e_press(self):
+        # Działania do wykonania po naciśnięciu klawisza F11
+        print("Klawisz E został wciśnięty (globalnie) - SCREENSHOT")
+        # self.metin_lowienie.save_screen_shot()
+        self.memory_service.horse_key_execute()
 
 if __name__ == "__main__":
     app = MyApp()
