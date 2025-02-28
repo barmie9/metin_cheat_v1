@@ -2,7 +2,6 @@
 from ReadWriteMemory import ReadWriteMemory
 
 from color_service import ColorService
-from config_metin import MetinConfig
 from ctype_service import CtypeService
 from dinput_keys import DinputKeys
 from thread_executor import ThreadExecutor
@@ -11,9 +10,10 @@ from code_injector import  CodeInjector
 import time
 
 class MemoryService:
-    def __init__(self):
+    def __init__(self, config):
         # self.process_name = "Samia.exe"
-        self.config = MetinConfig('config.cfg')
+        self.config = config
+        self.is_virtual_machine = self.config.get("RUNNING_MACHINE") == "virtual"
         self.process_name = self.config.get('PROCESS_NAME')
         # self.process_name = "Mt2009.exe"
 
@@ -76,13 +76,13 @@ class MemoryService:
 
     def press_key(self, key):
         # print("key", key)
-        address, value = self.dinput_keys.get_key_address(key)
+        address, value = self.dinput_keys.get_key_address(key, self.is_virtual_machine)
 
         # print("value", address, value)
         self.process.write(address, value)
 
     def release_key(self, key):
-        address, value = self.dinput_keys.get_key_address(key)
+        address, value = self.dinput_keys.get_key_address(key, self.is_virtual_machine)
         self.process.write(address, 0)
 
     # def click_key(self, key, time_sec=0.01):

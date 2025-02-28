@@ -1,4 +1,5 @@
 import re
+import ast
 
 
 class MetinConfig:
@@ -24,14 +25,20 @@ class MetinConfig:
                     self.config[key.strip()] = self._parse_value(value.strip())
 
     def _parse_value(self, value):
-        """Parsuje wartość do odpowiedniego typu (int, float, str)."""
+        """Parsuje wartość do odpowiedniego typu (int, float, list, tuple, str)."""
         try:
             return int(value)
         except ValueError:
             try:
                 return float(value)
             except ValueError:
-                return value
+                try:
+                    parsed_value = ast.literal_eval(value)
+                    if isinstance(parsed_value, (list, tuple)):
+                        return parsed_value
+                except (ValueError, SyntaxError):
+                    pass
+        return value
 
     def get(self, key, default=None):
         """Pobiera wartość konfiguracji dla danego klucza."""
@@ -63,6 +70,7 @@ class MetinConfig:
     def __str__(self):
         """Zwraca reprezentację konfiguracji jako string."""
         return "\n".join(f"{key} = {value}" for key, value in self.config.items())
+
 
 
 # # Przykład użycia:

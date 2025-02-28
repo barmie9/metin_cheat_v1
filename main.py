@@ -7,13 +7,15 @@ from capture_dxcam import CaptureDxcam
 # from lowienie_metin2009 import LowienieMetin
 from memory_service import MemoryService
 from script_service import ScriptService
-
+from config_metin import MetinConfig
 
 class MyApp(tk.Tk):
     def __init__(self):
         super().__init__()
 
         self.title("Metin2 Cheat")
+
+        self.config = MetinConfig('config.cfg')
 
         # Tworzenie i rozmieszczanie widżetów
         self.create_widgets()
@@ -23,13 +25,13 @@ class MyApp(tk.Tk):
         self.listener.start()
 
         # Tworzenie serwisu dla pamięci procesu
-        self.memory_service = MemoryService()
+        self.memory_service = MemoryService(self.config)
 
         # Id metod powtarzanych w pętli
         # self.after_id_key_z = None
         self.after_ids = {}  # Dictionary to store after_id for each task
 
-        self.script_service = ScriptService()
+        self.script_service = ScriptService(self.config)
 
         # self.metin_lowienie = LowienieMetin()
         self.cap = CaptureDxcam()

@@ -2,10 +2,10 @@ from memory_service import MemoryService
 from thread_executor import ThreadExecutor
 
 class ScriptService:
-    def __init__(self):
+    def __init__(self, config):
         self.config_file_name = "config.txt"
         self.scripts_file_name = "scripts.txt"
-        self.memory_service = MemoryService()
+        self.memory_service = MemoryService(config)
         self.scripts_list = self.load_scripts()
         self.thread_executor = ThreadExecutor()
 
