@@ -11,3 +11,5 @@
 
 
 2. Do ataku można wykorzystać drugą wartość do chodzenia (ustawić np na 1 lub 65537)
+
+3. Do dinput, naciskanie klawiszy używać 1Byte. wartość 0 oraz 128.

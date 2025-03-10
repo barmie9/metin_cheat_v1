@@ -1,5 +1,7 @@
 import os
 import time
+from time import sleep
+
 import mss
 import ctypes
 import random
@@ -16,13 +18,16 @@ class POINT(ctypes.Structure):
 
 
 class LowienieMetin:
-    def __init__(self):
+    def __init__(self, app):
+        self.app = app
         self.config = MetinConfig('config.cfg')
         self.x = 0
         self.y = 0
         self.memory_service = MemoryService(self.config)
         self.capture_dxcam = CaptureDxcam()
         self.capture_dxcam.screenshot()  # Pierwsze wywolanie wywala bleda, dlatego robie je tutaj, musi wykonac sie w grze metin
+        self.is_running = False
+        self.prev_fish_time = time.time()
 
     def key_space(self):
         self.memory_service.click_key_not_thread("space", 0.07)
@@ -65,50 +70,6 @@ class LowienieMetin:
                              y))
         return r == 116 and g == 103 and b == 76
 
-    # def fishing_game(self):
-    #     with mss.mss() as sct:
-    #         # Making screenshot:
-    #         monitor = {"top": 0, "left": 0, "width": 1920, "height": 1080}
-    #         screenshot = sct.grab(monitor)
-    #
-    #         # Checking pixels:
-    #         # R&G&B < 65 = black
-    #         # R&G&B > 170 = fish
-    #         # R|G|B > 69 & R&G&B < 170
-    #         # 776x396 - 776x683
-    #         x = 776
-    #
-    #         # y cord:
-    #         bottom_mov = 0
-    #         top_mov = 0
-    #         fish_mov = 0
-    #         # Checking pixels from bottom to top:
-    #         for i in range(683, 395, -1):
-    #             # print(i)
-    #             pixel = tuple(map(int, screenshot.pixel(x, i)))  # Konwersja na int
-    #             # print(pixel[:3])
-    #             pix_res = self.check_pixel(pixel[:3])
-    #             if fish_mov == 0 and pix_res == 1:
-    #                 fish_mov = i
-    #                 # print("RYBA " + str(i))
-    #             if bottom_mov == 0 and pix_res == 2:
-    #                 bottom_mov = i
-    #                 # print("DOL " + str(i))
-    #             if top_mov == 0 and bottom_mov != 0 and fish_mov != 0 and pix_res == 0 and abs(fish_mov - i) > 8:
-    #                 top_mov = i
-    #                 # print("GORA " + str(i))
-    #             if top_mov == 0 and i == 396:
-    #                 top_mov = i
-    #                 self.log_fishing("INFO", "Wykryto kolorowy pasek na samej gorze")
-    #
-    #         if (bottom_mov - (bottom_mov - top_mov) / 2) < fish_mov:
-    #             self.log_fishing("INFO", "GAME: press space")
-    #             self.key_space()
-    #
-    #         if top_mov == 396:
-    #             return False
-    #         else:
-    #             return True
 
     def fishing_game_v2(self):
         # Making screenshot:
@@ -230,17 +191,33 @@ class LowienieMetin:
         print(f"[{type}] - ({formatted_time}) -> {message}")
 
     def positioning_character(self):
-        self.memory_service.press_key('w')
-        time.sleep(0.2)
-        self.memory_service.press_key('e')
-        time.sleep(0.6)
-        self.memory_service.release_key('e')
-        time.sleep(0.1)
-        self.memory_service.press_key('q')
-        time.sleep(0.6)
-        self.memory_service.release_key('q')
+        print("POSITION CHAR")
+        for i in range(10):
+            self.memory_service.press_key('w')
+            self.memory_service.press_key('e')
+            time.sleep(0.02)
         self.memory_service.release_key('w')
-        time.sleep(0.1)
+        self.memory_service.release_key('e')
+        sleep(0.1)
+        # for i in range(50):
+        #     self.memory_service.press_key('w')
+        #     self.memory_service.press_key('q')
+        #     time.sleep(0.01)
+        # self.memory_service.release_key('w')
+        # self.memory_service.release_key('q')
+
+        # self.memory_service.press_key('w')
+        # time.sleep(0.2)
+        # self.memory_service.press_key('e')
+        # time.sleep(0.6)
+        # self.memory_service.release_key('e')
+        # time.sleep(0.1)
+        # self.memory_service.press_key('q')
+        # time.sleep(0.6)
+        # self.memory_service.release_key('q')
+        # self.memory_service.release_key('w')
+        # time.sleep(0.1)
+
         self.memory_service.press_key('r')
         self.memory_service.press_key('g')
         time.sleep(2.8)
@@ -249,6 +226,8 @@ class LowienieMetin:
         time.sleep(0.1)
 
     def start_fishing(self):
+        self.is_running = True
+        self.log_fishing("INFO", "Uruchamianie Fish bota")
 
         time.sleep(self.config.get("TIME_START_FISHING"))
         self.positioning_character()
@@ -256,22 +235,37 @@ class LowienieMetin:
         self.key_f1()
         time.sleep(self.config.get("TIME_BETWEEN_PRESS_KEY"))
         self.key_space()
-        prev_fish_time = time.time()
-        while True:
+        self.prev_fish_time = time.time()
+
+        while self.is_running:
+            self.fishing_loop()
+
+    def stop_fishing(self):
+        self.is_running = False
+        self.log_fishing("INFO", "Zatrzymanie Fish bota")
+
+    # def start_stop_fishing(self):
+    #     if self.is_running:
+    #         self.stop_fishing()
+    #     else:
+    #         self.start_fishing()
+
+    def fishing_loop(self):
+        if self.is_running:
             self.screenshot()
 
             # Jesli przez czas 44s (TIME_RESTART_FISHING) nie pojawi sie dymek to zarzuc jeszcze raz:
-            if (time.time() - prev_fish_time) > self.config.get("TIME_RESTART_FISHING"):
+            if (time.time() - self.prev_fish_time) > self.config.get("TIME_RESTART_FISHING"):
                 self.log_fishing("WAR", str(self.config.get("TIME_RESTART_FISHING"))
                                  + " sek bez dymka, Ponowne zarzucenie...")
                 self.key_f1()
                 time.sleep(self.config.get("TIME_BETWEEN_PRESS_KEY"))
                 self.key_space()
-                prev_fish_time = time.time()
+                self.prev_fish_time = time.time()
 
             if self.is_fish():
                 self.log_fishing("INFO", "Bierze !  !!")
-                prev_fish_time = time.time()
+                self.prev_fish_time = time.time()
                 # time.sleep(2.5) #od 1.8 do 2.5s
                 time.sleep(self.rand_num(self.config.get("TIME_BUBBLE_WAIT_FROM"),
                                          self.config.get("TIME_BUBBLE_WAIT_TO")))
@@ -317,10 +311,14 @@ class LowienieMetin:
             if self.is_messaging():
                 self.log_fishing("INFO", "WYKRYTO WIADOMOSC!")
                 self.alarm(self.config.get("ALARM_COUNT_LOOP"))
+            # self.app.after(1, self._fish_loop)  # Zaplanuj kolejne wywołanie za 1 milisekundę
 
-fishing = LowienieMetin()
 
-fishing.start_fishing()
+
+
+# fishing = LowienieMetin()
+#
+# fishing.start_fishing()
 
 # time.sleep(5)
 #
